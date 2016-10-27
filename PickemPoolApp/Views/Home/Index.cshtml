@@ -1,0 +1,37 @@
+﻿@model IList<PickemPoolApp.EF.Participant>
+
+<style>
+    th {
+        padding: .5rem 1rem .5rem 1rem;
+    }
+    td {
+        padding: .5rem 1rem .5rem 1rem;
+    }
+</style>
+
+<h2>Standings</h2>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Team</th>
+        <th>Team</th>
+        <th>Team</th>
+        <th>Team</th>
+        <th>Team</th>
+        <th>Points</th>
+    </tr> 
+
+@foreach (var participant in Model.OrderByDescending(o => o.TotalPoints))
+{
+    <tr>
+        <td>@participant.Name</td>
+        @foreach (var team in participant.Teams)
+        {
+            <td>@team.Name (@team.TotalPoints)</td>
+        }
+        <td style="text-align: right">@participant.TotalPoints</td>
+    </tr>
+}
+
+</table>
